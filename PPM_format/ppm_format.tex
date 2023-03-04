@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{float, hyperref, graphicx, listings,textcomp, subcaption}
+\title{Notes on PPM format}
+\author{Amritpal Singh}
+\date{4 March 2023}
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+\vspace{400px}
+Any errors in this document are most likely a product of my carelessness, 
+please report any errors if you find them at
+\href{mailto:sysgrammer@protonmail.com}{sysgrammer@protonmail.com}
+
+\newpage
+\section{Introduction}
+There are my notes on the PPM image file format after reading the wikipedia page
+and the netpbm's specification on PPM. PPM stands for Portable Pixel Map (
+there also exists PBM -- Portable Bit Map as well).
+
+\section{Header}
+The header of a PPM file is always in ASCII. It is described as follows in form
+of a list:
+\begin{enumerate}
+    \item P$x$ where $x \in X = \{3, 6\}$.
+    \item Whitespace.\footnotemark[1]
+    \item Width (in base 10 or decimal).
+    \item Whitespace.\footnotemark[1]
+    \item Height (in base 10 or decimal).
+    \item Whitespace.\footnotemark[1]
+    \item Maximum Color Value (mcv) where $0 < mcv < 65536$.
+    \item Whitespace.\footnotemark[1]
+\end{enumerate}
+
+
+Afterwards raster data is followed, which we will describe now.
+
+\section{Raster Data}
+
+Each pixel of a P3 or P6 image is defined as a triplet of red, green, blue
+values. A P3 type PPM image is known as a Plain PPM file because all of its
+pixel data is in ASCII as well, in contrast to P6 PPM which is known as Binary
+PPM where the header in ASCII but the raster data is in binary form.
+
+Note that, line following \verb|#| is a comment, don't use this in binary mode
+as it may skew the images to the right.
+
+\subsection{Binary PPM (P6)}
+
+In binary form, each of these values is represented in 1 or 2 bytes.
+If the $mcv$ is less than 256, then each value is of 1 byte, otherwise 2 bytes.
+
+The Raster data following the $(8)^{th}$ whitespace character is in Height 
+rows. The rows are ordered from top to bottom and each row is Width pixels wide
+, the pixels have been defined as specified above where Pixels in a row are
+ from left-to-right ordering. 
+\\
+A row of an image is horizontal and the columns are vertical. There is no actual
+separation required between each pixel in a row unike the "Plain" PPM file 
+described ahead.
+
+\subsection{Plain PPM (P3)}
+
+The Plain PPM format is fairly simple, instead of having binary data it
+contains plain ascii data where each pixel is a decimal value as ASCII.
+The following part highlights key differences between the two:
+\begin{itemize}
+    \item There is exactly one image in one file.
+    \item Magic number is P3 instead of P6.
+    \item Each pixel sample/value is represented as ASCII in 
+    decimal/base10 of arbitrary size.
+    \item Each pixel sample/value has a whitespace\footnotemark[1] before and
+    after it. There must atleast be one character of whitespace\footnotemark[1]
+    but there is no maximum. There is not exact separation between pixel --- 
+    just the required separation between blue sample from one pixel and the red
+    sample from the next pixel.
+    \item No line should be longer than 70 characters.
+\end{itemize}
+
+\subsection{P3 Example}
+Here is an example of a p3 type ppm image
+
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+P3
+# feep.ppm
+4 4
+15
+0  0  0    0  0  0    0  0  0   15  0 15
+0  0  0    0 15  7    0  0  0    0  0  0
+0  0  0    0  0  0    0 15  7    0  0  0
+15  0 15   0  0  0    0  0  0    0  0  0
+\end{lstlisting}
+\caption[short]{Nicely formatted P3 PPM}
+\end{figure}
+
+It does not matter whether you write your data in actual rows of 4x4
+but that each pixel's individual sample and the pixels are spearated
+by a whitespace\footnotemark[1]. You can even write one pixel per line.
+
+An Example would be as follows:
+
+\begin{figure}[H]
+    \centering
+\begin{lstlisting}
+P3
+# feep.ppm
+4 4
+15
+0  0  0
+0  0  0 
+0  0  0 
+15  0 15
+0  0  0 
+0 15  7 
+0  0  0 
+0  0  0
+0  0  0 
+0  0  0 
+0 15  7 
+0  0  0
+15  0 15
+0  0  0 
+0  0  0 
+0  0  0
+\end{lstlisting}
+\caption[short]{Another P3 PPM but formatted in a different manner}
+\end{figure}
+
+\footnotetext[1]{
+Note that, a whitespace is any of the following characters:
+\begin{itemize}
+    \item Newline ($\backslash n$, also known as a LF).
+    \item Tabs (vertical $\backslash v$ and horizontal $\backslash t$).
+    \item Carriage Return ($\backslash r$).
+    \item Form Freed ($\backslash f$).
+    \item Space
+\end{itemize}
+All characters except the Line Feed character are a "white space"
+Together, all of these are known as "whitespace" characters.
+}
+
+\end{document}

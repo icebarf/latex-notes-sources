@@ -1,0 +1,91 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath,graphicx,subcaption}
+\title{Icebarf's Math Notes}
+\author{Amritpal Singh}
+\date{March 2023}
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		This document contains small snippets of mathematical notes that I have 
+		remembered from school about Vectors. This may include notes for 
+		matrices as well and thus should be found here.
+	\end{abstract}
+
+	\section{Vector Products}
+	\subsection{Dot Product of two vectors}
+	Let there be a $\overrightarrow{A} = a\hat{i} + b\hat{j} + c\hat{k}$ and a 
+	$\overrightarrow{B} = m\hat{i} + n\hat{j} + o\hat{k}$. The dot product of 
+	there two vectors as $X$ can be represented as follows.
+	\begin{displaymath}
+		X = \overrightarrow{A} \cdot \overrightarrow{B}
+	\end{displaymath}
+	\begin{displaymath}
+		X = a \times m + b \times n + c \times o
+	\end{displaymath}
+
+	From above observations, it is obvious that a dot product is a scalar 
+	quantity and as such it is also known as the scalar product of two vectors.
+	Before we continue to the vector product, let us have a look at a simple 
+	example.
+	
+	\begin{displaymath}
+		\overrightarrow{M} = 2\hat{i} + 12\hat{j} + 6\hat{k} 
+	\end{displaymath}
+	\begin{displaymath}
+		\overrightarrow{N} = 7\hat{i} + 9\hat{j} + 13\hat{k} 
+	\end{displaymath}
+	
+	Now, the dot product of $\overrightarrow{M}$ and $\overrightarrow{N}$ is:
+	
+	\begin{displaymath}
+		X = 2 \times 7 + 12 \times 9 + 6 \times 13
+	\end{displaymath}
+	\begin{displaymath}
+		X = 14 + 108 + 78
+	\end{displaymath}
+	\begin{displaymath}
+		X = 200
+	\end{displaymath}
+
+	\subsection{Cross Product of two vectors}
+	As defined, above let there be two vectors $\overrightarrow{A}$ and 
+	$\overrightarrow{B}$. But unlike the previous quantity, this operation
+	results in a vector quantity and as such is also known as the vector
+	product.
+	Now let us define how the operation is performed. This is done by 
+	representing the two vectors as a matrix and calculating its determinant
+	which is represented by $|X|$ or $det(X)$ for some matrix $X$.
+	
+	Let a matrix $X$ be defined as follows
+	$X = \begin{bmatrix}
+		 \hat{i} & \hat{j} & \hat{k}\\
+		 a		 & b	   & c		\\
+		 m		 & n	   & o		\\
+	 	 \end{bmatrix}$
+ 	 
+ 	The cross product for vectors $\overrightarrow{A}$ and $\overrightarrow{B}$
+ 	will be the determinant of matrix $X$.
+ 	
+ 	\begin{displaymath}
+ 		|X| = \begin{vmatrix}
+ 		\hat{i} & \hat{j} & \hat{k}\\
+ 		a		 & b	   & c		\\
+ 		m		 & n	   & o		\\	
+ 		\end{vmatrix}
+ 	\end{displaymath}
+ 	\begin{displaymath}
+ 		|X| = (b \times o - c \times n)\hat{i} - (a \times o - m \times c)\hat{j}
+ 		+ (a \times n - b \times m)\hat{k}
+ 	\end{displaymath}
+ 	 \begin{displaymath}
+ 	 	|X| = (bo - cn)\hat{i} - (ao - mc)\hat{j} + (an - nb)\hat{k}
+ 	 \end{displaymath}
+	
+	Since, we know that the cross product of two vectors is the same as the 
+	determinant of the matrix representing the two, we can write above equation as:
+	
+	\begin{displaymath}
+		\overrightarrow{A} \times \overrightarrow{B} = |X| = 
+			(bo - cn)\hat{i} - (ao - mc)\hat{j} + (an - nb)\hat{k}
+	\end{displaymath}
+\end{document}
